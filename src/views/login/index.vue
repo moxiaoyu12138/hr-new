@@ -120,9 +120,8 @@ export default {
             // async标记的函数实际上一个promise对象
             // await下面的代码 都是成功执行的代码
             this.$router.push('/')
-          } catch (error) {
-            console.log(error)
-            alert(error)
+          } catch (err) {
+            console.log(err)
           } finally {
             //  不论执行try 还是catch  都去关闭转圈
             this.loading = false

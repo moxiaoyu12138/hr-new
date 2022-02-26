@@ -16,6 +16,11 @@ export function getUserInfo(token) {
   })
 }
 
+export function getUserDetailById(id) {
+  return request({
+    url: `/sys/user/${id}`
+  })
+}
 export function logout() {
 
 }
