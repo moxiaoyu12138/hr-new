@@ -4,7 +4,7 @@ import store from '@/store'
 import router from '@/router'
 // import { getToken } from '@/utils/auth'
 import { getTimeStamp } from '@/utils/auth'
-const TimeOut = 3600 // 定义超时时间
+const TimeOut = 7200 // 定义超时时间
 // 请求拦截器
 const service = axios.create({
   // 如果执行 npm run dev  值为 /api 正确  /api 这个代理只是给开发环境配置的代理
@@ -46,7 +46,12 @@ service.interceptors.response.use(response => {
     return Promise.reject(new Error(message))
   }
 }, error => {
-  Message.error(error.message) // 提示错误信息
+  if (error.response && error.response.data && error.response.data.code === 10002) {
+    store.dispatch('user/logou')
+    router.push('/login')
+  } else {
+    Message.error(error.message) // 提示错误信息
+  }
   return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
 })
 
