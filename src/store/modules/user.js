@@ -31,19 +31,18 @@ const actions = {
   async login(context, data) {
     const result = await login(data) // 实际上就是一个promise  result就是执行的结果
     // axios默认给数据加了一层data
-    if (result.data.success) {
-      // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
-      // 现在有用户token
-      // actions 修改state 必须通过mutations
-      context.commit('setToken', result.data.data)
-    }
+    console.log(result.data)
+    // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
+    // 现在有用户token
+    // actions 修改state 必须通过mutations
+    context.commit('setToken', result)
   },
   // 获取用户资料action
   async getUserInfo(context) {
     const result = await getUserInfo() // 获取返回值
     // 获取用户详情数据
-    const obj = await getUserDetailById(result.data.data.userId)
-    context.commit('setUserInfo', { ...result.data.data, ...obj.data.data }) // 将整个的个人信息设置到用户的vuex数据中
+    const obj = await getUserDetailById(result.userId)
+    context.commit('setUserInfo', { ...result, ...obj }) // 将整个的个人信息设置到用户的vuex数据中
     return result // 这里为什么要返回 为后面埋下伏笔
   }
 }

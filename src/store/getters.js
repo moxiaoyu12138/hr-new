@@ -3,7 +3,7 @@ const getters = {
   device: state => state.app.device,
   token: state => state.user.token, // 在根级的getters上 开发子模块的
   name: (state) => {
-    console.log(state.user.userInfo.staffPhoto)
+    // console.log(state.user.userInfo.staffPhoto)
     return state.user.userInfo.username
   }, // 建立用户名称的映射
   // name: state => state.user.userInfo.username, // 建立用户名称的映射
